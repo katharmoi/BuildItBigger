@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.JokeProvider;
 import com.kadirkertis.jokeviewer.JokeViewer;
 
 
@@ -60,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        task.execute();
     }
 
 
