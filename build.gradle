@@ -17,3 +17,35 @@ allprojects {
         jcenter()
     }
 }
+
+////Optional Task
+task startAppEngine(dependsOn:":backend:appengineRun"){
+    evaluationDependsOn ":backend"
+    project(':backend').appengine.daemon = true
+    doLast{
+        println "App Server Started"
+    }
+}
+
+task runTests(dependsOn:":app:connectedAndroidTest"){
+    mustRunAfter "startAppEngine"
+    doLast{
+        println "Tests Completed"
+    }
+}
+
+task stopAppEngine(dependsOn:":backend:appengineStop"){
+    mustRunAfter "runTests"
+    doLast{
+        println "App Server Stopped"
+    }
+}
+
+task testJoker(dependsOn:["startAppEngine","runTests","stopAppEngine"]){
+    doLast{
+        println "Tests Completed. Server Stopped"
+    }
+}
+
+
+
